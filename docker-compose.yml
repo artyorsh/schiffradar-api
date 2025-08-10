@@ -1,0 +1,19 @@
+networks:
+  main:
+
+services:
+
+  db:
+    container_name: schiffradar-db
+    image: postgis/postgis
+    platform: linux/amd64
+    environment:
+      POSTGRES_DB: $DB_NAME
+      POSTGRES_USER: $DB_USER
+      POSTGRES_PASSWORD: $DB_PASSWORD
+      TZ: UTC
+    ports:
+      - $DB_PORT:$DB_PORT
+    volumes:
+      - ./data/postgis:/var/lib/postgresql/data
+    restart: unless-stopped
